@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:senior_project/screens/beggining_screen.dart';
+import 'package:senior_project/screens/upload_picture_screen1.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,47 +22,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
   navigateToDeviceScreen() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => BegginingScreen()));
+        context, MaterialPageRoute(builder: (context) => UploadPictureScreen1()));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       //align to center of the scrren
-      
+      backgroundColor: Color(0xffFFFFFF),
       body: 
-        Container(
-          width: 375,
-          height: 670,
-          padding: const EdgeInsets.only(
-              top: 245,
-              left: 58,
-              right: 59,
-              bottom: 321,
-          ),
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(color: Colors.white),
-          child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+      Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                  SizedBox(
-                      width: 258,
-                      height: 104,
-                      child: Text(
-                          'Trimming \nTrends',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 40,
-                              fontFamily: 'Lobster Two',
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                          ),
-                      ),
+                Text(
+                  'Trimming\n Trends',
+                  style: TextStyle(
+                    fontFamily: 'Lobster Two',
+                    fontSize: 40,
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w400,
                   ),
-              ],
+                  textAlign: TextAlign.center,
+                
+                ) ,
+              ]
           ),
     ),
     );
