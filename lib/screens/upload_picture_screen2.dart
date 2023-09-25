@@ -1,20 +1,20 @@
+import 'package:senior_project/screens/result_screen.dart';
+import 'package:senior_project/screens/upload_picture_screen1.dart';
 import 'package:flutter/material.dart';
-import 'package:senior_project/screens/upload_picture_screen2.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
 
 
-class UploadPictureScreen1 extends StatefulWidget {
-  const UploadPictureScreen1({Key? key}) : super(key: key);
+class UploadPictureScreen2 extends StatefulWidget {
+  const UploadPictureScreen2({Key? key}) : super(key: key);
 
   @override
-  _UploadPictureScreen1State createState() => _UploadPictureScreen1State();
+  _UploadPictureScreen2State createState() => _UploadPictureScreen2State();
 }
 
-class _UploadPictureScreen1State extends State<UploadPictureScreen1>{
+class _UploadPictureScreen2State extends State<UploadPictureScreen2>{
 
-
-final files = ValueNotifier(<File>[]);
+  final files = ValueNotifier(<File>[]);
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ final files = ValueNotifier(<File>[]);
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Upload a picture of yourself',
+                  'Upload a picture of a haistylr you like',
                   style: TextStyle(
                     fontFamily: 'Lobster Two',
                     fontSize: 40,
@@ -83,11 +83,10 @@ final files = ValueNotifier(<File>[]);
                 ),
               ),
 
-              //button to go to next screen
+              //button to go to next screen and take image with it
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UploadPictureScreen2()));
-
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ResultScreen()));
                 },
                 child: const Icon(Icons.arrow_forward_ios),
               ),
@@ -96,4 +95,7 @@ final files = ValueNotifier(<File>[]);
         ),
     );
   }
+
+
+
 }
