@@ -21,17 +21,21 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(children: [
-          Text(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          const Text(
             'Here is your result\n (images will be displayed here))',
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w400,
             ),      
           ),
-        ],
-         mainAxisAlignment: MainAxisAlignment.center,)
+
+          //display the picture
+          //  Center(child: Image.asset('assets/desired_hair.jpg'))
+        ]
       )
-    );
+    ));
   }
 }
