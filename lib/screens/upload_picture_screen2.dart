@@ -1,25 +1,29 @@
+import 'package:senior_project/screens/result_screen.dart';
+import 'package:senior_project/screens/upload_picture_screen1.dart';
 import 'package:flutter/material.dart';
-import 'package:senior_project/screens/upload_picture_screen2.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 
-class UploadPictureScreen1 extends StatefulWidget {
-  const UploadPictureScreen1({Key? key}) : super(key: key);
+
+class UploadPictureScreen2 extends StatefulWidget {
+  const UploadPictureScreen2({Key? key}) : super(key: key);
 
   @override
-  _UploadPictureScreen1State createState() => _UploadPictureScreen1State();
+  _UploadPictureScreen2State createState() => _UploadPictureScreen2State();
 }
 
-class _UploadPictureScreen1State extends State<UploadPictureScreen1>{
+class _UploadPictureScreen2State extends State<UploadPictureScreen2>{
 
-
-final files = ValueNotifier(<File>[]);
+  final files = ValueNotifier(<File>[]);
 
   @override
   void initState() {
+
     files.addListener(() => setState(() {}));
     super.initState();
+
   }
 
   @override
@@ -30,7 +34,14 @@ final files = ValueNotifier(<File>[]);
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+
+
+    return WillPopScope(
+      onWillPop: () async{
+        Navigator.pop(context);
+        return false;
+      },
+      child: Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       body: 
          Column(
@@ -94,22 +105,22 @@ final files = ValueNotifier(<File>[]);
                 ),
 
               //buttons to navigate screens
-              // Row(
-                // mainAxisAlignment: MainAxisAlignment.,
-                // children: 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   
-                  // Align(
-                  // alignment: Alignment.bottomLeft,
-                  // child:
-                  //   Padding(
-                  //     padding: const EdgeInsets.all(8.0),
-                  //     child: ElevatedButton(
-                  //       onPressed: () => Navigator.of(context).pop(),
-                  //       child: const Icon(Icons.arrow_back),    
-                  //       // style:          
-                  //     ),
-                  //   )
-                  // ),
+                  Align(
+                  alignment: Alignment.bottomLeft,
+                  child:
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Icon(Icons.arrow_back),    
+                        // style:          
+                      ),
+                    )
+                  ),
 
                 Align(
                   alignment: Alignment.bottomRight,
@@ -118,7 +129,7 @@ final files = ValueNotifier(<File>[]);
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => UploadPictureScreen2()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ResultScreen()));
                         },
                         child: const Icon(Icons.arrow_forward),    
                         // style:          
@@ -126,11 +137,14 @@ final files = ValueNotifier(<File>[]);
                     )
                   ),
 
-                
-              // )
+                ],
+              )
               
             ]
         ),
-    );
+    ));
   }
+
+
+
 }
