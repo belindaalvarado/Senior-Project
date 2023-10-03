@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/screens/upload_picture_screen2.dart';
+import 'package:senior_project/screens/selection_screen.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
 
@@ -118,7 +119,7 @@ final files = ValueNotifier(<File>[]);
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => UploadPictureScreen2()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectionScreen()));
                         },
                         child: const Icon(Icons.arrow_forward),    
                         // style:          

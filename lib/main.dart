@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Lobster Two',
         // This is the theme of your application.
         //
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(168, 199, 183, 1)),
         useMaterial3: true,
       ),
       home: SplashScreen(),
