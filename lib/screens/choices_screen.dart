@@ -15,6 +15,7 @@ class _ChoicesScreenState extends State<ChoicesScreen>{
 
     return const Scaffold (
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children:[
           Text('Choices Screen'),
         ]
