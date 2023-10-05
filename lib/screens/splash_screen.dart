@@ -16,39 +16,42 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 3);
+    var duration = Duration(seconds: 5);
     return Timer(duration, navigateToDeviceScreen);
   }
 
   navigateToDeviceScreen() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => UploadPictureScreen1()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => UploadPictureScreen1()));
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       //align to center of the scrren
       backgroundColor: Color(0xffFFFFFF),
-      body: 
-      Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Trimming\n Trends',
-                  style: TextStyle(
-                    fontFamily: 'Lobster Two',
-                    fontSize: 40,
-                    color: Color(0xff000000),
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
-                
-                ) ,
-              ]
-          ),
-    ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/SplashScreenLogo.jpg'),
+          ],
+          //children: [
+
+          // Text(
+          //   'Trimming\n Trends',
+          //   style: TextStyle(
+          //     fontFamily: 'Lobster Two',
+          //     fontSize: 40,
+          //     color: Color(0xff000000),
+          //     fontWeight: FontWeight.w400,
+          //   ),
+          //   textAlign: TextAlign.center,
+
+          // ) ,
+          //]
+        ),
+      ),
     );
   }
 }
