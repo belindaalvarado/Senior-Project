@@ -12,12 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Trimming Trends',
       theme: ThemeData(
         fontFamily: 'Lobster Two',
         // This is the theme of your application.
         //
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(168, 199, 183, 1)),
         useMaterial3: true,
       ),
       home: SplashScreen(),
