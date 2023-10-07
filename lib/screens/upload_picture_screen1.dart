@@ -83,23 +83,6 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
           },
         ),
 
-        //buttons to navigate screens
-        // Row(
-        // mainAxisAlignment: MainAxisAlignment.,
-        // children:
-
-        // Align(
-        // alignment: Alignment.bottomLeft,
-        // child:
-        //   Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: ElevatedButton(
-        //       onPressed: () => Navigator.of(context).pop(),
-        //       child: const Icon(Icons.arrow_back),
-        //       // style:
-        //     ),
-        //   )
-        // ),
 
         Align(
             alignment: Alignment.bottomRight,
