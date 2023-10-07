@@ -67,6 +67,7 @@ flutter:
     - assets/images/short/short_1.png
     - assets/images/short/short_2.png
     - assets/icons/circle_check_mark.png
+    - assets/SplashScreenLogo.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
