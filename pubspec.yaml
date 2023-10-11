@@ -76,7 +76,7 @@ flutter:
     - assets/images/long/long_2.png
     - assets/images/long/long_3.png
     - assets/icons/circle_check_mark.png
-    - assets/SplashScreenLogo.jpg
+    - assets/SplashScreenLogo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -21,6 +21,14 @@ class _GalleryScreenState extends State<GalleryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Color.fromRGBO(168, 199, 183, 1),
+              )),
+        ),
         body: Column(
       children: [
         Padding(
