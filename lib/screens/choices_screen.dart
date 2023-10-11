@@ -112,40 +112,52 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                     ),
 
               //continue button
-              Padding(
-                
-                padding: EdgeInsets.only(top: 50),
-                  child: ElevatedButton(
-                  style: continueButton(_continue),
-                  onPressed: () {
-                    setState(() {
-                      if (hairLength[0] == true) {
-                        //short hair
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => GalleryScreen('short')));
-                      } else if (hairLength[1] == true) {
-                        //medium hair
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => GalleryScreen('med')));
-
-                      } else if (hairLength[2] == true) {
-                        //long hair
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => GalleryScreen('long')));
-
-                      } else{
-                        //no hair length selected
-                        print('no hair length selected');
-                      }
-                    });
-                  },
-                  child: Text(
-                    'continue',
-                    style: TextStyle(fontSize: 10, color: Colors.black, fontFamily:'Montserrat'),
-                  ),
-                  ),
-                ),
-              
-            
-            ]))]
-            )
-            ) ;
+              Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (hairLength[0] == true) {
+                            _continue = true;
+                            //short hair
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        GalleryScreen('short')));
+                          } else if (hairLength[1] == true) {
+                            _continue = true;
+                            //medium hair
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        GalleryScreen('med')));
+                          } else if (hairLength[2] == true) {
+                            _continue = true;
+                            //long hair
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        GalleryScreen('long')));
+                          } else {
+                            //no hair length selected
+                            _continue = false;
+                          }
+                          setState(() {});
+                        },
+                        style: continueButton(_continue),
+                        child: const Text(
+                          'continue',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]))
+        ]));
   }
 }
