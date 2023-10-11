@@ -67,14 +67,17 @@ flutter:
     - assets/images/short/short_1.png
     - assets/images/short/short_2.png
     - assets/images/short/short_3.png
+    - assets/images/short/short_4.png
     - assets/images/med/med_0.png
     - assets/images/med/med_1.png
     - assets/images/med/med_2.png
     - assets/images/med/med_3.png
+    - assets/images/med/med_4.png
     - assets/images/long/long_0.png
     - assets/images/long/long_1.png
     - assets/images/long/long_2.png
     - assets/images/long/long_3.png
+    - assets/images/long/long_4.png
     - assets/icons/circle_check_mark.png
     - assets/SplashScreenLogo.png
 

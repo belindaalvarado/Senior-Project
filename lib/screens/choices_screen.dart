@@ -112,9 +112,11 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                     ),
 
               //continue button
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
+              Padding(
+                
+                padding: EdgeInsets.only(top: 50),
+                  child: ElevatedButton(
+                  style: continueButton(_continue),
                   onPressed: () {
                     setState(() {
                       if (hairLength[0] == true) {
@@ -122,7 +124,7 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                         Navigator.push(context, MaterialPageRoute(builder:(context) => GalleryScreen('short')));
                       } else if (hairLength[1] == true) {
                         //medium hair
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => GalleryScreen('medium')));
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => GalleryScreen('med')));
 
                       } else if (hairLength[2] == true) {
                         //long hair
@@ -136,7 +138,7 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                   },
                   child: Text(
                     'continue',
-                    style: TextStyle(fontSize: 20, fontFamily: 'Montserrat'),
+                    style: TextStyle(fontSize: 10, color: Colors.black, fontFamily:'Montserrat'),
                   ),
                   ),
                 ),

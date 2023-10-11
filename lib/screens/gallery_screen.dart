@@ -7,16 +7,14 @@ class GalleryScreen extends StatefulWidget {
   const GalleryScreen(this.length, {Key? key}) : super(key: key);
 
   @override
-  _GalleryScreenState createState() => _GalleryScreenState();
+  _GalleryScreenState createState() => _GalleryScreenState(length);
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
   String imageChoice = '';
   List<bool> isSelected = [false, false, false, false];
   String length = '';
-  _GalleryScreenState() {
-    length = widget.length;
-  }
+  _GalleryScreenState(this.length);
 
   @override
   Widget build(BuildContext context) {
@@ -30,55 +28,76 @@ class _GalleryScreenState extends State<GalleryScreen> {
               )),
         ),
         body: Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(top: 100, bottom: 20),
-          child: Text(
-            'Choose a hairstyle',
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: 15,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 30, bottom: 20),
+              child: Text(
+                'Choose a hairstyle',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 15,
+                ),
+              ),
             ),
-          ),
-        ),
-        GridView.count(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          crossAxisCount: 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          shrinkWrap: true,
-          children: List.generate(isSelected.length, (i) {
-            return ImageButton(
-              width: 125,
-              height: 128,
-              image: 'assets/images/$length/${length}_$i.png',
-              onTap: () {
-                setState(() => {
-                      isSelected[i] = !isSelected[i],
-                      for (int j = 0; j < 4; j++)
-                        {
-                          if (j != i) {isSelected[j] = false}
-                        },
-                      imageChoice = 'assets/images/$length/${length}_$i.png'
-                    });
-              },
-              isSelected: isSelected[i],
-            );
-          }),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: ElevatedButton(
-            child: const Text(
-              'continue',
-              style: TextStyle(fontSize: 20, fontFamily: 'Montserrat'),
+            GridView.count(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              shrinkWrap: true,
+              children: List.generate(isSelected.length, (i) {
+                return ImageButton(
+                  width: 125,
+                  height: 128,
+                  image: 'assets/images/$length/${length}_${i+1}.png',
+                  onTap: () {
+                    setState(() => {
+                          isSelected[i] = !isSelected[i],
+                          for (int j = 0; j < 4; j++)
+                            {
+                              if (j != i) {isSelected[j] = false}
+                            },
+                          imageChoice = 'assets/images/$length/${length}_${i+1}.png'
+                        });
+                  },
+                  isSelected: isSelected[i],
+                );
+              }),
             ),
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => GeneratingScreen()));
-            },
-          ),
-        )
-      ],
-    ));
+            Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: ElevatedButton(
+                style: continueButton(true),
+                child: const Text(
+                  'continue',
+                  style: TextStyle(fontSize: 20, fontFamily: 'Montserrat'),
+                ),
+                onPressed: () {
+                   showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (_) {
+                        return const Dialog(
+                            backgroundColor: Colors.white,
+                            child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    // The loading indicator
+                                    CircularProgressIndicator(),
+                                    SizedBox(height: 15),
+                                    // Some text
+                                    Text('Loading...',
+                                        style: TextStyle(
+                                            fontFamily: 'Montserrat')),
+                                  ],
+                                )));// Navigator.push(context, MaterialPageRoute(builder: (context) => GeneratingScreen()));
+                });
+                },
+              ),
+            )
+          ],
+        ));
   }
 }
