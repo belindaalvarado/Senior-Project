@@ -111,8 +111,8 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                       ),
                     ),
 
-                    //continue button
-                    Align(
+              //continue button
+              Align(
                       alignment: Alignment.bottomCenter,
                       child: ElevatedButton(
                         onPressed: () {
@@ -131,7 +131,7 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        GalleryScreen('medium')));
+                                        GalleryScreen('med')));
                           } else if (hairLength[2] == true) {
                             _continue = true;
                             //long hair

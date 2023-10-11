@@ -1,9 +1,7 @@
 import 'package:senior_project/screens/result_screen.dart';
-import 'package:senior_project/screens/upload_picture_screen1.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 
 class UploadPictureScreen2 extends StatefulWidget {
   const UploadPictureScreen2({Key? key}) : super(key: key);
