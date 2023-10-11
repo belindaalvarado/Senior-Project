@@ -12,6 +12,7 @@ class UploadPictureScreen1 extends StatefulWidget {
 
 class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
   final files = ValueNotifier(<File>[]);
+  bool _continue = false;
 
   @override
   void initState() {
@@ -28,14 +29,14 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: Color(0xFFFFFFFF),
       body: Column(children: [
         const Padding(
             padding: EdgeInsets.only(top: 100),
             child: Align(
                 // alignment: Alignment.bottomCenter,
                 child: Text(
-              'Upload a picture of a hairstyle you like',
+              'Upload a picture of yourself.',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 15,
@@ -69,38 +70,47 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
           ),
         ),
 
-        //button to take picture
-        FloatingActionButton(
-          child: const Icon(Icons.camera),
-          onPressed: () async {
-            List<File>? res = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const WhatsappCamera(),
-              ),
-            );
-            if (res != null) files.value = res;
-          },
-        ),
-
-
-        Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
+        //buttons to take picture and button to confirm picture
+        Padding(
+            padding: EdgeInsets.only(bottom: 70.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FloatingActionButton(
+                  elevation: 0,
+                  backgroundColor: Color.fromRGBO(168, 199, 183, 1),
+                  child: const Icon(Icons.camera_alt),
+                  onPressed: () async {
+                    List<File>? res = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectionScreen()));
-                },
-                child: const Icon(Icons.arrow_forward),
-                // style:
-              ),
-            )),
-
-        // )
+                        builder: (context) => const WhatsappCamera(),
+                      ),
+                    );
+                    if (res != null) {
+                      files.value = res;
+                      _continue = !_continue;
+                    }
+                  },
+                ),
+                FloatingActionButton(
+                  elevation: 0,
+                  backgroundColor: _continue == true ? Color.fromRGBO(168, 199, 183, 1) : Color.fromRGBO(217, 217, 217, 1),
+                  child: const Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    if (_continue) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SelectionScreen()));
+                    }
+                  },
+                )
+              ],
+            ))
       ]),
     );
   }
