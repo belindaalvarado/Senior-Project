@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:senior_project/utils/buttons.dart';
+import 'package:senior_project/utils/templates.dart';
 
 class GalleryScreen extends StatefulWidget {
   final String length;
@@ -12,7 +12,11 @@ class GalleryScreen extends StatefulWidget {
 
 class _GalleryScreenState extends State<GalleryScreen> {
   String imageChoice = '';
-  bool isImageSelected = true;
+  List<bool> isSelected = [false, false, false, false];
+  String length = '';
+  _GalleryScreenState() {
+    length = widget.length;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,80 +33,40 @@ class _GalleryScreenState extends State<GalleryScreen> {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                width: 125,
-                height: 128,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isImageSelected = !isImageSelected;
-                      imageChoice = '/short/short_1';
-                    });
-                  },
-                  child: isImageSelected == true
-                      ? Stack(children: <Widget>[
-                          Container(
-                            // margin: EdgeInsets.only(top: 10),
-                            child: Image.asset(
-                              'assets/images/short/short_1.png',
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              'assets/icons/circle_check_mark.png',
-                              // fit: BoxFit.contain,
-                            ),
-                          )
-                        ])
-                      : Container(
-                          // margin: EdgeInsets.only(top: 10),
-                          child: Image.asset(
-                            'assets/images/short/short_1.png',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                )),
-            Container(
+        GridView.count(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          crossAxisCount: 2,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          shrinkWrap: true,
+          children: List.generate(isSelected.length, (i) {
+            return ImageButton(
               width: 125,
               height: 128,
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(0),
-              ),
-              child: IconButton(
-                icon: Image.asset(
-                  'assets/images/short/short_2.png',
-                  fit: BoxFit.contain,
-                ),
-                onPressed: () {
-                  imageChoice = '/short/short_2';
-                },
-              ),
-            )
-          ],
+              image: 'assets/images/$length/${length}_$i.png',
+              onTap: () {
+                setState(() => {
+                      isSelected[i] = !isSelected[i],
+                      for (int j = 0; j < 4; j++)
+                        {
+                          if (j != i) {isSelected[j] = false}
+                        },
+                      imageChoice = 'assets/images/$length/${length}_$i.png'
+                    });
+              },
+              isSelected: isSelected[i],
+            );
+          }),
         ),
-        Row(),
-        Row(),
         Padding(
-          padding: EdgeInsets.only(top: 100),
+          padding: const EdgeInsets.only(top: 100),
           child: ElevatedButton(
-            child: Text(
+            child: const Text(
               'continue',
               style: TextStyle(fontSize: 20, fontFamily: 'Montserrat'),
             ),
             onPressed: () {
-
               // Navigator.push(context, MaterialPageRoute(builder: (context) => GeneratingScreen()));
-
             },
           ),
         )
