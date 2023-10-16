@@ -34,7 +34,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
           return false;
         },
         child: Scaffold(
-           appBar: AppBar(
+          appBar: AppBar(
             leading: IconButton(
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(
@@ -83,46 +83,71 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
             ),
 
             //buttons to take picture and button to confirm picture
-        Padding(
-            padding: EdgeInsets.only(bottom: 70.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: Color.fromRGBO(168, 199, 183, 1),
-                  child: const Icon(Icons.camera_alt),
-                  onPressed: () async {
-                    List<File>? res = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const WhatsappCamera(),
-                      ),
-                    );
-                    if (res != null) {
-                      files.value = res;
-                      _continue = !_continue;
-                    }
-                  },
-                ),
-                FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: _continue == true ? Color.fromRGBO(168, 199, 183, 1) : Color.fromRGBO(217, 217, 217, 1),
-                  child: const Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    if (_continue) {
-                      Navigator.push(
+            Padding(
+                padding: EdgeInsets.only(bottom: 70.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FloatingActionButton(
+                      elevation: 0,
+                      backgroundColor: Color.fromRGBO(168, 199, 183, 1),
+                      child: const Icon(Icons.camera_alt),
+                      onPressed: () async {
+                        List<File>? res = await Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ResultScreen()));
-                    }
-                  },
-                )
-              ],
-            )),
+                            builder: (context) => const WhatsappCamera(),
+                          ),
+                        );
+                        if (res != null) {
+                          files.value = res;
+                          _continue = !_continue;
+                        }
+                      },
+                    ),
+                    FloatingActionButton(
+                      elevation: 0,
+                      backgroundColor: _continue == true
+                          ? Color.fromRGBO(168, 199, 183, 1)
+                          : Color.fromRGBO(217, 217, 217, 1),
+                      child: const Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (_) {
+                              return const Dialog(
+                                  backgroundColor: Colors.white,
+                                  child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 20),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          // The loading indicator
+                                          CircularProgressIndicator(),
+                                          SizedBox(height: 15),
+                                          // Some text
+                                          Text('Loading...',
+                                              style: TextStyle(
+                                                  fontFamily: 'Montserrat')),
+                                        ],
+                                      )));
+                            });
+                        Future.delayed(Duration(seconds: 2), () {
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ResultScreen()));
+                        });
+                      },
+                    )
+                  ],
+                )),
           ]),
         ));
   }
