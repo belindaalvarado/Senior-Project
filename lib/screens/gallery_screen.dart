@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/utils/buttons.dart';
 import 'package:senior_project/utils/templates.dart';
+import 'package:senior_project/screens/result_screen.dart';
 
 class GalleryScreen extends StatefulWidget {
   final String length;
@@ -14,6 +15,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
   String imageChoice = '';
   List<bool> isSelected = [false, false, false, false];
   String length = '';
+  bool _continue = false;
+
   _GalleryScreenState(this.length);
 
   @override
@@ -49,15 +52,17 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 return ImageButton(
                   width: 125,
                   height: 128,
-                  image: 'assets/images/$length/${length}_${i+1}.png',
+                  image: 'assets/images/$length/${length}_${i + 1}.png',
                   onTap: () {
                     setState(() => {
                           isSelected[i] = !isSelected[i],
+                          _continue = isSelected[i],
                           for (int j = 0; j < 4; j++)
                             {
                               if (j != i) {isSelected[j] = false}
                             },
-                          imageChoice = 'assets/images/$length/${length}_${i+1}.png'
+                          imageChoice =
+                              'assets/images/$length/${length}_${i + 1}.png'
                         });
                   },
                   isSelected: isSelected[i],
@@ -67,35 +72,44 @@ class _GalleryScreenState extends State<GalleryScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 100),
               child: ElevatedButton(
-                style: continueButton(true),
-                child: const Text(
-                  'continue',
-                  style: TextStyle(fontSize: 20, fontFamily: 'Montserrat'),
-                ),
-                onPressed: () {
-                   showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (_) {
-                        return const Dialog(
-                            backgroundColor: Colors.white,
-                            child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 20),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    // The loading indicator
-                                    CircularProgressIndicator(),
-                                    SizedBox(height: 15),
-                                    // Some text
-                                    Text('Loading...',
-                                        style: TextStyle(
-                                            fontFamily: 'Montserrat')),
-                                  ],
-                                )));// Navigator.push(context, MaterialPageRoute(builder: (context) => GeneratingScreen()));
-                });
-                },
-              ),
+                  style: continueButton(_continue),
+                  child: const Text(
+                    'continue',
+                    style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontFamily: 'Montserrat'),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (_) {
+                          return const Dialog(
+                              backgroundColor: Colors.white,
+                              child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      // The loading indicator
+                                      CircularProgressIndicator(),
+                                      SizedBox(height: 15),
+                                      // Some text
+                                      Text('Loading...',
+                                          style: TextStyle(
+                                              fontFamily: 'Montserrat')),
+                                    ],
+                                  )));
+                        });
+                    Future.delayed(Duration(seconds: 2), () {
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResultScreen()));
+                    });
+                  }),
             )
           ],
         ));
