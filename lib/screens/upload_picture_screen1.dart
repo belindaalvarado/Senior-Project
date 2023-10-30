@@ -90,7 +90,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                     );
                     if (res != null) {
                       files.value = res;
-                      _continue = !_continue;
+                      _continue = true;
                     }
                   },
                 ),
@@ -109,7 +109,6 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ColorHairScreen()));
-                      //builder: (context) => SelectionScreen()));
                     }
                   },
                 )

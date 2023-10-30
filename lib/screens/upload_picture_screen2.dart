@@ -102,7 +102,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                         );
                         if (res != null) {
                           files.value = res;
-                          _continue = !_continue;
+                          _continue = true;
                         }
                       },
                     ),
