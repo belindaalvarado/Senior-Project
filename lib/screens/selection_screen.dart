@@ -110,7 +110,8 @@ class _SelectionScreenState extends State<SelectionScreen> {
                           if (_choose_pic) {
                             _choose_pic = !_choose_pic;
                             _continue = !_continue;
-                          } else {
+                          } 
+                          else {
                             _choose_pic = !_choose_pic;
                             _upload_pic = false;
                             _continue = true;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/screens/selection_screen.dart';
+//import 'package:senior_project/screens/selection_screen.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
+import 'package:senior_project/screens/hair_color_option.dart';
 import 'dart:io';
 
 class UploadPictureScreen1 extends StatefulWidget {
@@ -29,7 +30,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1),//Color(0xFFFFFFFF),
       body: Column(children: [
         const Padding(
             padding: EdgeInsets.only(top: 100),
@@ -95,7 +96,9 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                 ),
                 FloatingActionButton(
                   elevation: 0,
-                  backgroundColor: _continue == true ? Color.fromRGBO(168, 199, 183, 1) : Color.fromRGBO(217, 217, 217, 1),
+                  backgroundColor: _continue == true
+                      ? Color.fromRGBO(168, 199, 183, 1)
+                      : Color.fromRGBO(217, 217, 217, 1),
                   child: const Icon(
                     Icons.check_circle_outline,
                     color: Colors.black,
@@ -105,7 +108,8 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SelectionScreen()));
+                              builder: (context) => ColorHairScreen()));
+                      //builder: (context) => SelectionScreen()));
                     }
                   },
                 )
