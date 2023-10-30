@@ -1,4 +1,5 @@
 import 'package:senior_project/screens/result_screen.dart';
+//import 'package:senior_project/screens/hair_color_option.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
@@ -142,7 +143,8 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ResultScreen()));
+                                  //builder: (context) => ColorHairScreen()));
+                          builder: (context) => ResultScreen()));
                         });
                       },
                     )
