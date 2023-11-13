@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/utils/buttons.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/screens/result_screen.dart';
+import '../utils/model.dart';
+
+Model model = Model();
 
 class GalleryScreen extends StatefulWidget {
   final String length;
@@ -72,44 +75,67 @@ class _GalleryScreenState extends State<GalleryScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 100),
               child: ElevatedButton(
-                  style: continueButton(_continue),
-                  child: const Text(
-                    'continue',
-                    style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.black,
-                        fontFamily: 'Montserrat'),
+                style: continueButton(_continue),
+                child: const Text(
+                  'continue',
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.black,
+                    fontFamily: 'Montserrat',
                   ),
-                  onPressed: () {
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (_) {
-                          return const Dialog(
-                              backgroundColor: Colors.white,
-                              child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 20),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      // The loading indicator
-                                      CircularProgressIndicator(),
-                                      SizedBox(height: 15),
-                                      // Some text
-                                      Text('Loading...',
-                                          style: TextStyle(
-                                              fontFamily: 'Montserrat')),
-                                    ],
-                                  )));
-                        });
-                    Future.delayed(Duration(seconds: 2), () {
-                      Navigator.of(context).pop();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ResultScreen()));
-                    });
-                  }),
+                ),
+                onPressed: () async {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (_) {
+                      return Dialog(
+                        backgroundColor: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(height: 15),
+                              Text('Loading...',
+                                  style: TextStyle(fontFamily: 'Montserrat')),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+
+                  try {
+                    String image1 =
+                        // "https://firebasestorage.googleapis.com/v0/b/trimming-trends.appspot.com/o/gallery_pictures%2Flong%2Flong_0.png?alt=media&token=c0e1dd69-9eb7-4afd-a301-23a0857b5486";
+                        "https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_1.png?alt=media&token=48d6f110-4a43-4630-9830-3101fa772c58";
+                    String image2 =
+                        // "https://firebasestorage.googleapis.com/v0/b/trimming-trends.appspot.com/o/gallery_pictures%2Flong%2Flong_3.png?alt=media&token=53e804a4-bad8-4387-a5e5-22621b959876";
+                        "https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
+
+                    //create requests to model
+                    await model.http_post_request(image1, image2);
+                    await model.current_status();
+                    await model.result();
+
+                    // Close the loading dialog
+                    Navigator.of(context).pop();
+
+                    // Navigate to the next page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ResultScreen()),
+                    );
+                  } catch (error) {
+                    // catch errors
+                    print("Error: $error");
+                    // Close the loading dialog
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
             )
           ],
         ));
