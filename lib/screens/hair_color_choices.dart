@@ -18,7 +18,7 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
   String length = "";
   String imageChoice = "";
   bool _continue = false;
-  List<bool> isSelected = [false, false, false, false];
+  List<bool> isSelected = [false, false, false, false, false, false];
   //_GalleryScreenState(this.length);
 
   @override
@@ -64,7 +64,7 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                       setState(() => {
                             isSelected[i] = !isSelected[i],
                             _continue = isSelected[i],
-                            for (int j = 0; j < 4; j++)
+                            for (int j = 0; j < 6; j++)
                               {
                                 if (j != i) {isSelected[j] = false}
                               },
@@ -77,7 +77,7 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                 }),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 100),
+                padding: const EdgeInsets.only(top: 30),
                 child: ElevatedButton(
                     style: continueButton(_continue),
                     child: const Text(
@@ -89,10 +89,12 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                     ),
                     onPressed: () {
                       setState(() {
+                        if(_continue){
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SelectionScreen()));
+                      }
                       });
                     }),
               )
