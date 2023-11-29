@@ -114,9 +114,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     String image2 =
                         // "https://firebasestorage.googleapis.com/v0/b/trimming-trends.appspot.com/o/gallery_pictures%2Flong%2Flong_3.png?alt=media&token=53e804a4-bad8-4387-a5e5-22621b959876";
                         "https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
-
+                    String image3 =
+                        "https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
                     //create requests to model
-                    await model.http_post_request(image1, image2);
+                    await model.http_post_request(image1, image2, image3);
                     await model.current_status();
                     await model.result();
 
