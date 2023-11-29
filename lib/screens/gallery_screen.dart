@@ -3,6 +3,7 @@ import 'package:senior_project/utils/buttons.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/screens/result_screen.dart';
 import '../utils/model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 Model model = Model();
 
@@ -19,6 +20,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
   List<bool> isSelected = [false, false, false, false];
   String length = '';
   bool _continue = false;
+
+  Future<String> urlForDatabase1 = Future<String>.value("");
+  Future<String> urlForDatabase2 = Future<String>.value("");
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   _GalleryScreenState(this.length);
 
@@ -65,7 +70,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                               if (j != i) {isSelected[j] = false}
                             },
                           imageChoice =
-                              'assets/images/$length/${length}_${i + 1}.png'
+                              '/gallery_pictures/$length/${length}_${i + 1}.png'
                         });
                   },
                   isSelected: isSelected[i],
@@ -107,13 +112,19 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     },
                   );
 
+                  Reference ref1 = storage.ref('user_pic_1.png');
+                  Reference ref2 = storage.ref(imageChoice);
+                  urlForDatabase1 = getImageURL(ref1);
+                  urlForDatabase2 = getImageURL(ref2);
+
                   try {
-                    String image1 =
-                        // "https://firebasestorage.googleapis.com/v0/b/trimming-trends.appspot.com/o/gallery_pictures%2Flong%2Flong_0.png?alt=media&token=c0e1dd69-9eb7-4afd-a301-23a0857b5486";
-                        "https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_1.png?alt=media&token=48d6f110-4a43-4630-9830-3101fa772c58";
-                    String image2 =
-                        // "https://firebasestorage.googleapis.com/v0/b/trimming-trends.appspot.com/o/gallery_pictures%2Flong%2Flong_3.png?alt=media&token=53e804a4-bad8-4387-a5e5-22621b959876";
-                        "https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
+                    String image1 = await urlForDatabase1;
+                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_1.png?alt=media&token=48d6f110-4a43-4630-9830-3101fa772c58";
+                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/gallery_pictures%2Fshort%2Fshort_1.png?alt=media&token=f067205e-3893-4ebd-8605-7ace7cf8f8f7";
+
+                    String image2 = await urlForDatabase2;
+                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
+                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/gallery_pictures%2Fshort%2Fshort_2.png?alt=media&token=4d2e9f8d-1332-4817-af1d-e8faa1bd8f40";
 
                     //create requests to model
                     await model.http_post_request(image1, image2);

@@ -1,7 +1,7 @@
+import 'package:senior_project/utils/templates.dart';
 import 'package:flutter/material.dart';
-//import 'package:senior_project/screens/selection_screen.dart';
+import 'package:senior_project/screens/selection_screen.dart';
 import 'package:whatsapp_camera/whatsapp_camera.dart';
-import 'package:senior_project/screens/hair_color_option.dart';
 import 'dart:io';
 
 class UploadPictureScreen1 extends StatefulWidget {
@@ -13,7 +13,14 @@ class UploadPictureScreen1 extends StatefulWidget {
 
 class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
   final files = ValueNotifier(<File>[]);
+  StorageService service = StorageService();
   bool _continue = false;
+  Future<String>? filen;
+
+
+  String p = "";
+  String fileName = "";
+
 
   @override
   void initState() {
@@ -30,7 +37,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),//Color(0xFFFFFFFF),
+      backgroundColor: Color(0xFFFFFFFF),
       body: Column(children: [
         const Padding(
             padding: EdgeInsets.only(top: 100),
@@ -56,13 +63,12 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
               return ListView.builder(
                 itemCount: value.length,
                 itemBuilder: (context, index) {
-                  //download the image to local storage
 
                   return Image.file(
                     value[index],
                     //resize the image to fit the screen
-                    width: 300,
-                    height: 400,
+                    width: 1024,
+                    height: 1024,
                     fit: BoxFit.contain,
                   );
                 },
@@ -78,9 +84,6 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: Color.fromRGBO(168, 199, 183, 1),
-                  child: const Icon(Icons.camera_alt),
                   onPressed: () async {
                     List<File>? res = await Navigator.push(
                       context,
@@ -90,9 +93,19 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                     );
                     if (res != null) {
                       files.value = res;
+                    }
+                    if (res == null) {
+                      print("Error: No file selected");
+                    } 
+                    else {
+                      String path = res.single.path;
+                      p = path;
                       _continue = true;
                     }
                   },
+                  child: Icon(Icons.camera_alt),
+                  backgroundColor: Color.fromRGBO(168, 199, 183, 1),
+                  elevation: 0,
                 ),
                 FloatingActionButton(
                   elevation: 0,
@@ -105,10 +118,11 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                   ),
                   onPressed: () {
                     if (_continue) {
+                      filen = service.uploadFile(p, fileName, "user_pic_1");
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ColorHairScreen()));
+                              builder: (context) => SelectionScreen()));
                     }
                   },
                 )
@@ -117,4 +131,6 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
       ]),
     );
   }
+
+  
 }
