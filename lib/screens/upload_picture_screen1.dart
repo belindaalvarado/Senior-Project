@@ -1,3 +1,4 @@
+import 'package:senior_project/screens/hair_color_option.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/screens/selection_screen.dart';
@@ -67,8 +68,8 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                   return Image.file(
                     value[index],
                     //resize the image to fit the screen
-                    width: 1024,
-                    height: 1024,
+                    width: 300,
+                    height: 400,
                     fit: BoxFit.contain,
                   );
                 },
@@ -122,7 +123,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SelectionScreen()));
+                              builder: (context) => ColorHairScreen()));
                     }
                   },
                 )

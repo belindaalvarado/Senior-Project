@@ -5,7 +5,7 @@ import 'package:senior_project/screens/selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/utils/buttons.dart';
-//import 'dart:io';
+import '../utils/globals.dart' as globals; 
 
 class ColorHairOptionScreen extends StatefulWidget {
   const ColorHairOptionScreen({Key? key}) : super(key: key);
@@ -68,8 +68,8 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                               {
                                 if (j != i) {isSelected[j] = false}
                               },
-                            imageChoice =
-                                'assets/images/color/color_${i + 1}.jpg'
+                            //imageChoice =
+                            globals.hairColor = '/color/color_${i + 1}.png'
                           });
                     },
                     isSelected: isSelected[i],

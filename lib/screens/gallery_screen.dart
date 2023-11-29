@@ -4,6 +4,7 @@ import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/screens/result_screen.dart';
 import '../utils/model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import '../utils/globals.dart' as globals; 
 
 Model model = Model();
 
@@ -23,6 +24,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   Future<String> urlForDatabase1 = Future<String>.value("");
   Future<String> urlForDatabase2 = Future<String>.value("");
+  Future<String> urlForDatabase3 = Future<String>.value("");
+
   FirebaseStorage storage = FirebaseStorage.instance;
 
   _GalleryScreenState(this.length);
@@ -114,8 +117,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
                   Reference ref1 = storage.ref('user_pic_1.png');
                   Reference ref2 = storage.ref(imageChoice);
+                  Reference ref3 = storage.ref(globals.hairColor);
                   urlForDatabase1 = getImageURL(ref1);
                   urlForDatabase2 = getImageURL(ref2);
+                  urlForDatabase3 = getImageURL(ref3);
 
                   try {
                     String image1 = await urlForDatabase1;
@@ -126,8 +131,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
                     //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/gallery_pictures%2Fshort%2Fshort_2.png?alt=media&token=4d2e9f8d-1332-4817-af1d-e8faa1bd8f40";
 
+                    String image3 = await urlForDatabase3;
+
                     //create requests to model
-                    await model.http_post_request(image1, image2);
+                    await model.http_post_request(image1, image2, image3);
                     await model.current_status();
                     await model.result();
 

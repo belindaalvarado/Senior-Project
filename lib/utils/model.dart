@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class Model {
-  String key = "r8_0gu0cDgR6DvoeJAZTwveiMbicwCjFDY0yoClf";
+  String key = "Token r8_0gu0cDgR6DvoeJAZTwveiMbicwCjFDY0yoClf";
+  String version =
+      "5ca3a91f7908f4e84f7f5ae675a014f584309dc4966d0eb03520c3bf1e1bc60f";
   final api_POST_URL = "https://api.replicate.com/v1/predictions";
   late String id;
   late String api_GET_URL;
@@ -12,16 +14,16 @@ class Model {
   Model();
 
   //creates post request to start prediction
-  Future<void> http_post_request(image1, image2) async {
+   Future<void> http_post_request(image1, image2, image3) async {
     Uri url = Uri.parse(api_POST_URL);
     final response = await http.post(url,
-        headers: {"Authorization": "", 'Content-Type': 'application/json'},
+        headers: {"Authorization": key, 'Content-Type': 'application/json'},
         body: jsonEncode({
-          "version":
-              'c4c7e5a657e2e1abccd57625093522a9928edeccee77e3f55d57c664bcd96fa2',
+          "version": version,
           "input": {
             'source_image': image1,
             'target_image': image2,
+            'color_image': image3,
           },
         }));
     if (response.statusCode == 201) {
@@ -41,7 +43,7 @@ class Model {
   Future<void> http_post_request2() async {
     Uri url = Uri.parse(api_POST_URL);
     final response = await http.post(url,
-        headers: {"Authorization": "", 'Content-Type': 'application/json'},
+        headers: {"Authorization": key, 'Content-Type': 'application/json'},
         body: jsonEncode({
           "version":
               'd938add77615da25dd74c9bcbc5b8ee11c9c3476eb721a6991d32fe5c2ec1968',
@@ -73,7 +75,7 @@ class Model {
   Future<String> get_current_status() async {
     Uri url = Uri.parse(api_GET_URL);
     final response = await http.get(url, headers: {
-      "Authorization": "",
+      "Authorization": key,
     });
     print(json.decode(response.body)["status"]);
     return json.decode(response.body)["status"];
@@ -106,7 +108,7 @@ class Model {
   Future<void> cancel_prediction() async {
     Uri url = Uri.parse(api_GET_URL + "/cancel");
     final response = await http.post(url, headers: {
-      "Authorization": "",
+      "Authorization": key,
     });
     print(json.decode(response.body));
   }
@@ -116,7 +118,7 @@ class Model {
     print("Result");
     Uri url = Uri.parse(api_GET_URL);
     final response = await http.get(url, headers: {
-      "Authorization": "",
+      "Authorization": key,
     });
     if (json.decode(response.body)["output"] != null) {
       output_URL = json.decode(response.body)["output"];
