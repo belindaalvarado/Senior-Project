@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "0.8.1+7"
   camera_camera:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: camera_camera
       sha256: "93c87789668b2ecacabb7a0fbef4f5257aa498f394f26fd4dc0ef573ea682f1a"

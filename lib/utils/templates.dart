@@ -12,13 +12,13 @@ class StorageService {
     File uploadedimage = File(filePath);
 
     //convert uploadedimage to PNG format
-    img.Image? image = img.decodeImage(uploadedimage.readAsBytesSync());
-    img.Image? resizedImage = img.copyResize(image!, width: 1024, height: 1024);
-    uploadedimage = File(filePath)
-      ..writeAsBytesSync(img.encodePng(resizedImage));
+    //img.Image? image = img.decodeImage(uploadedimage.readAsBytesSync());
+    //img.Image? resizedImage = img.copyResize(image!);
+    //uploadedimage = File(filePath)
+     // ..writeAsBytesSync(img.encodePng(image!));
 
     //rename uploadedimage
-    fileName = picName + ".png";
+    fileName = picName + ".jpg";
 
     try {
       await firebaseStorage.ref(fileName).putFile(uploadedimage).then(
