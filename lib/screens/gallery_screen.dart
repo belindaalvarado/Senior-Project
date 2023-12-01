@@ -115,7 +115,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     },
                   );
 
-                  Reference ref1 = storage.ref('user_pic_1.png');
+                  Reference ref1 = storage.ref('user_pic_1.jpg');
                   Reference ref2 = storage.ref(imageChoice);
                   Reference ref3 = storage.ref(globals.hairColor);
                   urlForDatabase1 = getImageURL(ref1);

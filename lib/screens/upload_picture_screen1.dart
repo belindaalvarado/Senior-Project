@@ -23,15 +23,20 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
   String p = "";
   String fileName = "";
 
-  void openCamera() {
+  void openCamera(bool _continue) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (_) => CameraCamera(
+              resolutionPreset: ResolutionPreset.max,
                   onFile: (file) {
                     pictures.add(file);
                     Navigator.pop(context);
-                    setState(() {});
+                    setState(() {
+                      if (pictures.length != 0) {
+                        _continue = true;
+                      }
+                    });
                   },
                 )));
   }
@@ -64,6 +69,20 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                   fontSize: 15,
                 ),
               ))),
+          //display the picture
+        Padding(
+            padding: EdgeInsets.only(top: 10, bottom: 40),
+            child: Align(
+                // alignment: Alignment.bottomCenter,
+                child: Container(
+                    width: 300,
+                    height: 400,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: pictures.length == 0
+                        ? Image.asset("assets/empty.jpg")
+                        : Image.file(pictures[0]) 
+                        ))),
           //buttons to take picture and button to confirm picture
           Padding(
             padding: EdgeInsets.only(bottom: 70.0),
@@ -71,7 +90,22 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FloatingActionButton(
-                    onPressed: openCamera,
+                    onPressed: (){
+                      Navigator.push(
+                                      context,
+                  MaterialPageRoute(
+                  builder: (_) => CameraCamera(
+                  onFile: (file) {
+                    pictures.add(file);
+                    Navigator.pop(context);
+                    setState(() {
+                      if (pictures.length != 0) {
+                        _continue = true;
+                      }
+                    });},
+                    )));
+                    },
+
                     child: Icon(Icons.camera_alt),
                     backgroundColor: Color.fromRGBO(168, 199, 183, 1),
                     elevation: 0,
