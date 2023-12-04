@@ -69,7 +69,7 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                                 if (j != i) {isSelected[j] = false}
                               },
                             imageChoice =
-                                'assets/images/color/color_${i + 1}.jpg'
+                                '/color/color_${i + 1}.png'
                           });
                     },
                     isSelected: isSelected[i],

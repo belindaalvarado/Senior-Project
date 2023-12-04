@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "392831950171",
+    "project_id": "trimming-trends-c1485",
+    "storage_bucket": "trimming-trends-c1485.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392831950171:android:1931a730a7b77406ae0e7e",
+        "android_client_info": {
+          "package_name": "com.example.senior_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNmr2-zbO2yfuhYKH3HvpP1mXeOXrHx74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -38,7 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   path_provider: ^2.1.1
   image_picker: ^1.0.4
-  http: ^0.13.3
+  firebase_storage: ^11.5.3
+  camera_camera: ^2.0.2
+  firebase_core: ^2.24.0
 
 dev_dependencies:
   flutter_test:
@@ -102,6 +104,7 @@ flutter:
     - assets/icons/circle_check_mark.png
     - assets/SplashScreenLogo.png
     - assets/icons/icon.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

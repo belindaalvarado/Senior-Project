@@ -1,6 +1,45 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image/image.dart' as img;
 
 //make stateful widget called ImageButton
+
+class StorageService {
+  final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+
+  Future<String> uploadFile(String filePath, String fileName, String picName) async {
+    File uploadedimage = File(filePath);
+
+    //convert uploadedimage to PNG format
+    //img.Image? image = img.decodeImage(uploadedimage.readAsBytesSync());
+    //img.Image? resizedImage = img.copyResize(image!);
+    //uploadedimage = File(filePath)
+     // ..writeAsBytesSync(img.encodePng(image!));
+
+    //rename uploadedimage
+    fileName = picName + ".jpg";
+
+    try {
+      await firebaseStorage.ref(fileName).putFile(uploadedimage).then(
+        (p0) {
+          print("File Uploaded" + fileName);
+
+        },
+      );
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+
+    return fileName;
+  }
+
+}
+
+  Future<String> getImageURL(Reference file) async {
+  final String downloadURL = await file.getDownloadURL();
+  return downloadURL;
+}
 
 class ImageButton extends StatefulWidget {
   final String image;
@@ -51,8 +90,6 @@ class _ImageButtonState extends State<ImageButton> {
                 child: Image.asset(
                 widget.image,
                 fit: BoxFit.contain,
-                width: widget.width,
-                height: widget.height,
             ),
           )));
                 
