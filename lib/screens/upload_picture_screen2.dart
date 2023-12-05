@@ -1,8 +1,13 @@
-import 'package:senior_project/screens/result_screen.dart';
-//import 'package:senior_project/screens/hair_color_option.dart';
+import 'package:senior_project/utils/templates.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
+import 'package:camera_camera/camera_camera.dart';
+import 'package:senior_project/screens/result_screen.dart';
+import '../utils/model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import '../utils/globals.dart' as globals;
+
+Model model = Model();
 
 class UploadPictureScreen2 extends StatefulWidget {
   const UploadPictureScreen2({Key? key}) : super(key: key);
@@ -12,20 +17,32 @@ class UploadPictureScreen2 extends StatefulWidget {
 }
 
 class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
-  final files = ValueNotifier(<File>[]);
+  //final files = ValueNotifier(<File>[]);
+  final pictures = <File>[];
+  StorageService service = StorageService();
   bool _continue = false;
+  Future<String>? filen;
 
-  @override
-  void initState() {
-    files.addListener(() => setState(() {}));
-    super.initState();
-  }
+  Future<String> urlForDatabase1 = Future<String>.value("");
+  Future<String> urlForDatabase2 = Future<String>.value("");
+  Future<String> urlForDatabase3 = Future<String>.value("");
 
-  @override
-  void dispose() {
-    files.dispose();
-    super.dispose();
-  }
+  FirebaseStorage storage = FirebaseStorage.instance;
+
+  String p = "";
+  String fileName = "";
+
+  // @override
+  // void initState() {
+  //   files.addListener(() => setState(() {}));
+  //   super.initState();
+  // }
+
+  // @override
+  // void dispose() {
+  //   files.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,31 +74,18 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                 ))),
 
             //display the picture
-            Expanded(
-              child: ValueListenableBuilder<List<File>>(
-                valueListenable: files,
-                builder: (context, value, child) {
-                  if (value.isEmpty) {
-                    return Center(child: Image.asset('assets/empty.jpg'));
-                  }
-
-                  return ListView.builder(
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      //download the image to local storage
-
-                      return Image.file(
-                        value[index],
-                        //resize the image to fit the screen
+            Padding(
+                padding: EdgeInsets.only(top: 10, bottom: 40),
+                child: Align(
+                    // alignment: Alignment.bottomCenter,
+                    child: Container(
                         width: 300,
                         height: 400,
-                        fit: BoxFit.contain,
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: pictures.length == 0
+                            ? Image.asset("assets/empty.jpg")
+                            : Image.file(pictures[0])))),
 
             //buttons to take picture and button to confirm picture
             Padding(
@@ -90,64 +94,104 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FloatingActionButton(
-                      elevation: 0,
-                      backgroundColor: Color.fromRGBO(168, 199, 183, 1),
-                      child: const Icon(Icons.camera_alt),
-                      onPressed: () async {
-                        List<File>? res = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const WhatsappCamera(),
-                          ),
-                        );
-                        if (res != null) {
-                          files.value = res;
-                          _continue = true;
-                        }
-                      },
-                    ),
-                    FloatingActionButton(
-                      elevation: 0,
-                      backgroundColor: _continue == true
-                          ? Color.fromRGBO(168, 199, 183, 1)
-                          : Color.fromRGBO(217, 217, 217, 1),
-                      child: const Icon(
-                        Icons.check_circle_outline,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (_) {
-                              return const Dialog(
-                                  backgroundColor: Colors.white,
-                                  child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 20),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          // The loading indicator
-                                          CircularProgressIndicator(),
-                                          SizedBox(height: 15),
-                                          // Some text
-                                          Text('Loading...',
-                                              style: TextStyle(
-                                                  fontFamily: 'Montserrat')),
-                                        ],
-                                      )));
-                            });
-                        Future.delayed(Duration(seconds: 2), () {
-                          Navigator.of(context).pop();
+                        elevation: 0,
+                        backgroundColor: Color.fromRGBO(168, 199, 183, 1),
+                        child: const Icon(Icons.camera_alt),
+                        onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  //builder: (context) => ColorHairScreen()));
-                          builder: (context) => ResultScreen()));
-                        });
-                      },
-                    )
+                                  builder: (_) => CameraCamera(
+                                        onFile: (file) {
+                                          pictures.add(file);
+                                          Navigator.pop(context);
+                                          setState(() {
+                                            if (pictures.length != 0) {
+                                              _continue = true;
+                                            }
+                                          });
+                                        },
+                                      )));
+                          FloatingActionButton(
+                              elevation: 0,
+                              backgroundColor: _continue == true
+                                  ? Color.fromRGBO(168, 199, 183, 1)
+                                  : Color.fromRGBO(217, 217, 217, 1),
+                              child: const Icon(
+                                Icons.check_circle_outline,
+                                color: Colors.black,
+                              ),
+                              onPressed: () async {
+                                if (_continue) {
+                                  p = pictures[0].path;
+                                  filen = service.uploadFile(
+                                      p, fileName, "user_pic_2");
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (_) {
+                                      return Dialog(
+                                        backgroundColor: Colors.white,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              CircularProgressIndicator(),
+                                              SizedBox(height: 15),
+                                              Text('Loading...',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'Montserrat')),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+
+                                  Reference ref1 =
+                                      storage.ref('user_pic_1.jpg');
+                                  Reference ref2 =
+                                      storage.ref('user_pic_2.jpg');
+                                  Reference ref3 =
+                                      storage.ref(globals.hairColor);
+                                  urlForDatabase1 = getImageURL(ref1);
+                                  urlForDatabase2 = getImageURL(ref2);
+                                  urlForDatabase3 = getImageURL(ref3);
+
+                                  try {
+                                    String image1 = await urlForDatabase1;
+
+                                    String image2 = await urlForDatabase2;
+
+                                    String image3 = await urlForDatabase3;
+
+                                    //create requests to model
+                                    await model.http_post_request(
+                                        image1, image2, image3);
+                                    await model.current_status();
+                                    await model.result();
+
+                                    // Close the loading dialog
+                                    Navigator.of(context).pop();
+
+                                    // Navigate to the next page
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ResultScreen()),
+                                    );
+                                  } catch (error) {
+                                    // catch errors
+                                    print("Error: $error");
+                                    // Close the loading dialog
+                                    Navigator.of(context).pop();
+                                  }
+                                }
+                              });
+                        })
                   ],
                 )),
           ]),

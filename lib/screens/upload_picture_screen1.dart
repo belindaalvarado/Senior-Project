@@ -1,8 +1,8 @@
 import 'package:senior_project/screens/hair_color_option.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:flutter/material.dart';
-import 'package:senior_project/screens/selection_screen.dart';
-import 'package:whatsapp_camera/whatsapp_camera.dart';
+//import 'package:senior_project/screens/selection_screen.dart';
+//import 'package:whatsapp_camera/whatsapp_camera.dart';
 import 'dart:io';
 import 'package:camera_camera/camera_camera.dart';
 
@@ -22,24 +22,6 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
 
   String p = "";
   String fileName = "";
-
-  void openCamera(bool _continue) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (_) => CameraCamera(
-              resolutionPreset: ResolutionPreset.max,
-                  onFile: (file) {
-                    pictures.add(file);
-                    Navigator.pop(context);
-                    setState(() {
-                      if (pictures.length != 0) {
-                        _continue = true;
-                      }
-                    });
-                  },
-                )));
-  }
 
   //@override
   // void initState() {

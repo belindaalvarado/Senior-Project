@@ -1,7 +1,6 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:image/image.dart' as img;
 
 //make stateful widget called ImageButton
 

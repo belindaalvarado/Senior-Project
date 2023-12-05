@@ -73,7 +73,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                               if (j != i) {isSelected[j] = false}
                             },
                           imageChoice =
-                              '/gallery_pictures/$length/${length}_${i + 1}.png'
+                              '/gallery_pictures/$length/${length}_${i + 1}.jpg'
                         });
                   },
                   isSelected: isSelected[i],
