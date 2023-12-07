@@ -14,7 +14,7 @@ class Model {
   Model();
 
   //creates post request to start prediction
-   Future<void> http_post_request(image1, image2, image3) async {
+  Future<void> http_post_request(image1, image2, image3) async {
     Uri url = Uri.parse(api_POST_URL);
     final response = await http.post(url,
         headers: {"Authorization": key, 'Content-Type': 'application/json'},

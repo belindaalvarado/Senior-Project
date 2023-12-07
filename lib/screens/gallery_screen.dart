@@ -18,7 +18,7 @@ class GalleryScreen extends StatefulWidget {
 
 class _GalleryScreenState extends State<GalleryScreen> {
   String imageChoice = '';
-  List<bool> isSelected = [false, false, false, false];
+  List<bool> isSelected = [false, false, false, false, false, false];
   String length = '';
   bool _continue = false;
 
@@ -54,26 +54,28 @@ class _GalleryScreenState extends State<GalleryScreen> {
               ),
             ),
             GridView.count(
+              scrollDirection: Axis.vertical,
               padding: EdgeInsets.only(left: 20, right: 20),
               crossAxisCount: 2,
               mainAxisSpacing: 20,
               crossAxisSpacing: 20,
               shrinkWrap: true,
               children: List.generate(isSelected.length, (i) {
+                
                 return ImageButton(
-                  width: 125,
-                  height: 128,
-                  image: 'assets/images/$length/${length}_${i + 1}.png',
+                  width: 10,
+                  height: 10,
+                  image: 'assets/images/$length/${length}_${i}.png',
                   onTap: () {
                     setState(() => {
                           isSelected[i] = !isSelected[i],
                           _continue = isSelected[i],
-                          for (int j = 0; j < 4; j++)
+                          for (int j = 0; j < isSelected.length; j++)
                             {
                               if (j != i) {isSelected[j] = false}
                             },
                           imageChoice =
-                              '/gallery_pictures/$length/${length}_${i + 1}.jpg'
+                              '/gallery_pictures/$length/${length}_${i}.jpg'
                         });
                   },
                   isSelected: isSelected[i],

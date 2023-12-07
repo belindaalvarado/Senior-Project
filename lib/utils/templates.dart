@@ -89,6 +89,8 @@ class _ImageButtonState extends State<ImageButton> {
                 child: Image.asset(
                 widget.image,
                 fit: BoxFit.contain,
+                width: widget.width,
+                height: widget.height,
             ),
           )));
                 
