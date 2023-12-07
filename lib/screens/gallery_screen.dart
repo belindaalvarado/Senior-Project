@@ -4,7 +4,7 @@ import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/screens/result_screen.dart';
 import '../utils/model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import '../utils/globals.dart' as globals; 
+import '../utils/globals.dart' as globals;
 
 Model model = Model();
 
@@ -118,9 +118,18 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   Reference ref1 = storage.ref('user_pic_1.jpg');
                   Reference ref2 = storage.ref(imageChoice);
                   Reference ref3 = storage.ref(globals.hairColor);
+                 
+                  print("Ref1 PATH: ${ref1.fullPath}");
+                  print("Ref2 PATH: ${ref2.fullPath}");
+                  print("Ref3 PATH: ${ref3.fullPath}");
+
                   urlForDatabase1 = getImageURL(ref1);
                   urlForDatabase2 = getImageURL(ref2);
                   urlForDatabase3 = getImageURL(ref3);
+
+                  print("url1 PATH: ${urlForDatabase1}");
+                  print("url2 PATH: ${urlForDatabase2}");
+                  print("url3 PATH: ${urlForDatabase3}");
 
                   try {
                     String image1 = await urlForDatabase1;

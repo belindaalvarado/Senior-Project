@@ -63,7 +63,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                         borderRadius: BorderRadius.circular(10)),
                     child: pictures.length == 0
                         ? Image.asset("assets/empty.jpg")
-                        : Image.file(pictures[0]) 
+                        : Image.file(pictures[pictures.length-1]) 
                         ))),
           //buttons to take picture and button to confirm picture
           Padding(
@@ -85,13 +85,16 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                         _continue = true;
                       }
                     });},
-                    )));
+                    )
+                    )
+                    );
                     },
 
                     child: Icon(Icons.camera_alt),
                     backgroundColor: Color.fromRGBO(168, 199, 183, 1),
                     elevation: 0,
                   ),
+                  
                   FloatingActionButton(
                       elevation: 0,
                       backgroundColor: _continue == true
@@ -103,7 +106,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                       ),
                       onPressed: () {
                         if (_continue) {
-                          p = pictures[0].path;
+                          p = pictures[pictures.length-1].path;
                           filen = service.uploadFile(p, fileName, "user_pic_1");
                           Navigator.push(
                               context,

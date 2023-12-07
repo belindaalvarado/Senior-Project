@@ -52,149 +52,143 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
           return false;
         },
         child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Color.fromRGBO(168, 199, 183, 1),
-                )),
-          ),
-          backgroundColor: Color(0xffFFFFFF),
-          body: Column(children: [
-            const Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: Align(
-                    child: Text(
-                  'Upload a picture of a style you like.',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 15,
-                  ),
-                ))),
+            appBar: AppBar(
+              leading: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Color.fromRGBO(168, 199, 183, 1),
+                  )),
+            ),
+            backgroundColor: Color(0xffFFFFFF),
+            body: Column(children: [
+              const Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Align(
+                      child: Text(
+                    'Upload a picture of a style you like.',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 15,
+                    ),
+                  ))),
 
-            //display the picture
-            Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 40),
-                child: Align(
-                    // alignment: Alignment.bottomCenter,
-                    child: Container(
-                        width: 300,
-                        height: 400,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: pictures.length == 0
-                            ? Image.asset("assets/empty.jpg")
-                            : Image.file(pictures[0])))),
+              //display the picture
+              Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 40),
+                  child: Align(
+                      // alignment: Alignment.bottomCenter,
+                      child: Container(
+                          width: 300,
+                          height: 400,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: pictures.length == 0
+                              ? Image.asset("assets/empty.jpg")
+                              : Image.file(pictures[pictures.length-1])))),
 
-            //buttons to take picture and button to confirm picture
-            Padding(
-                padding: EdgeInsets.only(bottom: 70.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FloatingActionButton(
-                        elevation: 0,
-                        backgroundColor: Color.fromRGBO(168, 199, 183, 1),
-                        child: const Icon(Icons.camera_alt),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => CameraCamera(
-                                        onFile: (file) {
-                                          pictures.add(file);
-                                          Navigator.pop(context);
-                                          setState(() {
-                                            if (pictures.length != 0) {
-                                              _continue = true;
-                                            }
-                                          });
-                                        },
-                                      )));
-                          FloatingActionButton(
-                              elevation: 0,
-                              backgroundColor: _continue == true
-                                  ? Color.fromRGBO(168, 199, 183, 1)
-                                  : Color.fromRGBO(217, 217, 217, 1),
-                              child: const Icon(
-                                Icons.check_circle_outline,
-                                color: Colors.black,
-                              ),
-                              onPressed: () async {
-                                if (_continue) {
-                                  p = pictures[0].path;
-                                  filen = service.uploadFile(
-                                      p, fileName, "user_pic_2");
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (_) {
-                                      return Dialog(
-                                        backgroundColor: Colors.white,
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 20),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CircularProgressIndicator(),
-                                              SizedBox(height: 15),
-                                              Text('Loading...',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          'Montserrat')),
-                                            ],
-                                          ),
+              //buttons to take picture and button to confirm picture
+              Padding(
+                  padding: EdgeInsets.only(bottom: 70.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FloatingActionButton(
+                            elevation: 0,
+                            backgroundColor: Color.fromRGBO(168, 199, 183, 1),
+                            child: const Icon(Icons.camera_alt),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => CameraCamera(
+                                            onFile: (file) {
+                                              pictures.add(file);
+                                              Navigator.pop(context);
+                                              setState(() {
+                                                if (pictures.length != 0) {
+                                                  _continue = true;
+                                                }
+                                              });
+                                            },
+                                          )));
+                            }),
+                        FloatingActionButton(
+                            elevation: 0,
+                            backgroundColor: _continue == true
+                                ? Color.fromRGBO(168, 199, 183, 1)
+                                : Color.fromRGBO(217, 217, 217, 1),
+                            child: const Icon(
+                              Icons.check_circle_outline,
+                              color: Colors.black,
+                            ),
+                            onPressed: () async {
+                              if (_continue) {
+                                p = pictures[pictures.length-1].path;
+                                filen = service.uploadFile(
+                                    p, fileName, "user_pic_2");
+                                showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (_) {
+                                    return Dialog(
+                                      backgroundColor: Colors.white,
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 20),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            CircularProgressIndicator(),
+                                            SizedBox(height: 15),
+                                            Text('Loading...',
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat')),
+                                          ],
                                         ),
-                                      );
-                                    },
-                                  );
-
-                                  Reference ref1 =
-                                      storage.ref('user_pic_1.jpg');
-                                  Reference ref2 =
-                                      storage.ref('user_pic_2.jpg');
-                                  Reference ref3 =
-                                      storage.ref(globals.hairColor);
-                                  urlForDatabase1 = getImageURL(ref1);
-                                  urlForDatabase2 = getImageURL(ref2);
-                                  urlForDatabase3 = getImageURL(ref3);
-
-                                  try {
-                                    String image1 = await urlForDatabase1;
-
-                                    String image2 = await urlForDatabase2;
-
-                                    String image3 = await urlForDatabase3;
-
-                                    //create requests to model
-                                    await model.http_post_request(
-                                        image1, image2, image3);
-                                    await model.current_status();
-                                    await model.result();
-
-                                    // Close the loading dialog
-                                    Navigator.of(context).pop();
-
-                                    // Navigate to the next page
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ResultScreen()),
+                                      ),
                                     );
-                                  } catch (error) {
-                                    // catch errors
-                                    print("Error: $error");
-                                    // Close the loading dialog
-                                    Navigator.of(context).pop();
-                                  }
+                                  },
+                                );
+
+                                Reference ref1 = storage.ref('user_pic_1.jpg');
+                                Reference ref2 = storage.ref('user_pic_2.jpg');
+                                Reference ref3 = storage.ref(globals.hairColor);
+                                urlForDatabase1 = getImageURL(ref1);
+                                urlForDatabase2 = getImageURL(ref2);
+                                urlForDatabase3 = getImageURL(ref3);
+
+                                try {
+                                  String image1 = await urlForDatabase1;
+
+                                  String image2 = await urlForDatabase2;
+
+                                  String image3 = await urlForDatabase3;
+
+                                  //create requests to model
+                                  await model.http_post_request(
+                                      image1, image2, image3);
+                                  await model.current_status();
+                                  await model.result();
+
+                                  // Close the loading dialog
+                                  Navigator.of(context).pop();
+
+                                  // Navigate to the next page
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResultScreen()),
+                                  );
+                                } catch (error) {
+                                  // catch errors
+                                  print("Error: $error");
+                                  // Close the loading dialog
+                                  Navigator.of(context).pop();
                                 }
-                              });
-                        })
-                  ],
-                )),
-          ]),
-        ));
+                              }
+                            })
+                      ]))
+            ])));
   }
 }
