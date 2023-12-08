@@ -53,12 +53,15 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 100,
+            )
+            ,
             GridView.count(
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.only(left: 20, right: 20),
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
+              padding: EdgeInsets.only(left: 10, right: 10),
+              crossAxisCount: 3,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
               shrinkWrap: true,
               children: List.generate(isSelected.length, (i) {
                 
@@ -81,7 +84,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   isSelected: isSelected[i],
                 );
               }),
-            ),
+            )
+            ,
             Padding(
               padding: const EdgeInsets.only(top: 100),
               child: ElevatedButton(

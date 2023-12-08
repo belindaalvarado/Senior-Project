@@ -1,10 +1,7 @@
-//import 'dart:html';
 import 'package:senior_project/screens/selection_screen.dart';
-import 'package:senior_project/screens/choices_screen.dart';
 import 'package:senior_project/screens/hair_color_choices.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/utils/buttons.dart';
-//import 'dart:io';
 
 class ColorHairScreen extends StatefulWidget {
   const ColorHairScreen({Key? key}) : super(key: key);
@@ -14,6 +11,7 @@ class ColorHairScreen extends StatefulWidget {
 }
 
 class _ColorHairScreenState extends State<ColorHairScreen> {
+  //status of the buttons on the screen
   bool _continue = false;
   bool _hair_change = false;
   bool _no_hair_change = false;
@@ -57,7 +55,6 @@ class _ColorHairScreenState extends State<ColorHairScreen> {
                 child: Container(
                     width: 337,
                     height: 96,
-                    //constraints: const BoxConstraints(maxHeight: 96),
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 2,
@@ -134,7 +131,6 @@ class _ColorHairScreenState extends State<ColorHairScreen> {
                               MaterialPageRoute(
                                   builder: (context) =>
                                       ColorHairOptionScreen()));
-                          //UploadPictureScreen2()));
                         } else if (_no_hair_change) {
                           Navigator.push(
                               context,
@@ -158,5 +154,5 @@ class _ColorHairScreenState extends State<ColorHairScreen> {
         ),
       ),
     );
-  } // widget
-} // class
+  } 
+} 

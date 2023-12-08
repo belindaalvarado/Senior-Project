@@ -7,6 +7,7 @@ import '../utils/model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../utils/globals.dart' as globals;
 
+//make a reference to the model
 Model model = Model();
 
 class UploadPictureScreen2 extends StatefulWidget {
@@ -17,9 +18,10 @@ class UploadPictureScreen2 extends StatefulWidget {
 }
 
 class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
-  //final files = ValueNotifier(<File>[]);
+  // array to ftore picture files
   final pictures = <File>[];
   StorageService service = StorageService();
+  // continue button status
   bool _continue = false;
   Future<String>? filen;
 
@@ -31,18 +33,6 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
 
   String p = "";
   String fileName = "";
-
-  // @override
-  // void initState() {
-  //   files.addListener(() => setState(() {}));
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   files.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,26 +63,28 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                     ),
                   ))),
 
-              //display the picture
-              Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 40),
-                  child: Align(
-                      // alignment: Alignment.bottomCenter,
-                      child: Container(
-                          width: 300,
-                          height: 400,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: pictures.length == 0
-                              ? Image.asset("assets/empty.jpg")
-                              : Image.file(pictures[pictures.length-1])))),
+//display the picture
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 40),
+                      child: Align(
+                          child: Container(
+                              width: 300,
+                              height: 400,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: pictures.length == 0
+                                  ? Image.asset("assets/empty.jpg")
+                                  : Image.file(
+                                      pictures[pictures.length - 1]))))),
 
-              //buttons to take picture and button to confirm picture
+//buttons to take picture and button to confirm picture
               Padding(
                   padding: EdgeInsets.only(bottom: 70.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+  //button to take/re-take the photo from user
                         FloatingActionButton(
                             elevation: 0,
                             backgroundColor: Color.fromRGBO(168, 199, 183, 1),
@@ -113,6 +105,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                                             },
                                           )));
                             }),
+  //button to confirm the photo uploaded by the user
                         FloatingActionButton(
                             elevation: 0,
                             backgroundColor: _continue == true
@@ -122,9 +115,10 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                               Icons.check_circle_outline,
                               color: Colors.black,
                             ),
+// if the user confirms the uploaded photo, upload it to firebase
                             onPressed: () async {
                               if (_continue) {
-                                p = pictures[pictures.length-1].path;
+                                p = pictures[pictures.length - 1].path;
                                 filen = service.uploadFile(
                                     p, fileName, "user_pic_2");
                                 showDialog(
@@ -151,18 +145,19 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                                   },
                                 );
 
+// Create references to the desired photos (user picture, desired hair style, desired hair color) in firebase
                                 Reference ref1 = storage.ref('user_pic_1.jpg');
                                 Reference ref2 = storage.ref('user_pic_2.jpg');
                                 Reference ref3 = storage.ref(globals.hairColor);
+
+// Get the URL locations for the firebase references to feed into the model                                
                                 urlForDatabase1 = getImageURL(ref1);
                                 urlForDatabase2 = getImageURL(ref2);
                                 urlForDatabase3 = getImageURL(ref3);
 
                                 try {
                                   String image1 = await urlForDatabase1;
-
                                   String image2 = await urlForDatabase2;
-
                                   String image3 = await urlForDatabase3;
 
                                   //create requests to model
@@ -180,9 +175,10 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                                     MaterialPageRoute(
                                         builder: (context) => ResultScreen()),
                                   );
-                                } catch (error) {
+                                } catch (error) { 
                                   // catch errors
                                   print("Error: $error");
+
                                   // Close the loading dialog
                                   Navigator.of(context).pop();
                                 }

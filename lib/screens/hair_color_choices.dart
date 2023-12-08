@@ -1,11 +1,8 @@
-//import 'dart:html';
-//import 'package:senior_project/screens/upload_picture_screen2.dart';
 import 'package:senior_project/screens/selection_screen.dart';
-//import 'package:senior_project/screens/hair_color_choices.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/utils/buttons.dart';
-import '../utils/globals.dart' as globals; 
+import '../utils/globals.dart' as globals;
 
 class ColorHairOptionScreen extends StatefulWidget {
   const ColorHairOptionScreen({Key? key}) : super(key: key);
@@ -19,7 +16,6 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
   String imageChoice = "";
   bool _continue = false;
   List<bool> isSelected = [false, false, false, false, false, false];
-  //_GalleryScreenState(this.length);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +55,6 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                     width: 125,
                     height: 128,
                     image: 'assets/images/color/color_${i + 1}.jpg',
-                    //image: 'assets/images/$length/${length}_${i + 1}.png',
                     onTap: () {
                       setState(() => {
                             isSelected[i] = !isSelected[i],
@@ -68,7 +63,6 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                               {
                                 if (j != i) {isSelected[j] = false}
                               },
-                            //imageChoice =
                             globals.hairColor = '/color/color_${i + 1}.png'
                           });
                     },
@@ -89,12 +83,12 @@ class _ColorHairOptionScreenState extends State<ColorHairOptionScreen> {
                     ),
                     onPressed: () {
                       setState(() {
-                        if(_continue){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SelectionScreen()));
-                      }
+                        if (_continue) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SelectionScreen()));
+                        }
                       });
                     }),
               )
