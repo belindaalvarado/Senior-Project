@@ -35,16 +35,19 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                   fontSize: 15,
                 ),
               ))),
+          SizedBox(
+            height: 20,
+          ),
           Align(
               alignment: Alignment.center,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //add 3 buttons, for short, medium, or long hair
+                    //3 buttons - short, medium, or long hair
 
                     //short hair button
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(20),
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -67,7 +70,7 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
 
                     //medium hair button
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(20),
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -90,7 +93,7 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
 
                     //long hair button
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(20),
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -111,8 +114,12 @@ class _ChoicesScreenState extends State<ChoicesScreen> {
                       ),
                     ),
 
-              //continue button
-              Align(
+                    SizedBox(
+                      height: 60,
+                    ),
+
+                    //continue button
+                    Align(
                       alignment: Alignment.bottomCenter,
                       child: ElevatedButton(
                         onPressed: () {

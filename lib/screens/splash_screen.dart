@@ -27,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //align to center of the scrren
       backgroundColor: Color(0xffFFFFFF),
       body: Center(
         child: Column(
@@ -35,20 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset('assets/SplashScreenLogo.png',fit:BoxFit.fitWidth),
           ],
-          //children: [
-
-          // Text(
-          //   'Trimming\n Trends',
-          //   style: TextStyle(
-          //     fontFamily: 'Lobster Two',
-          //     fontSize: 40,
-          //     color: Color(0xff000000),
-          //     fontWeight: FontWeight.w400,
-          //   ),
-          //   textAlign: TextAlign.center,
-
-          // ) ,
-          //]
         ),
       ),
     );

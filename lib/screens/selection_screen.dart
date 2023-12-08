@@ -1,7 +1,6 @@
 import 'package:senior_project/screens/choices_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/screens/upload_picture_screen2.dart';
-import 'dart:io';
 import 'package:senior_project/utils/buttons.dart';
 
 class SelectionScreen extends StatefulWidget {
@@ -12,22 +11,10 @@ class SelectionScreen extends StatefulWidget {
 }
 
 class _SelectionScreenState extends State<SelectionScreen> {
-  final files = ValueNotifier(<File>[]);
+  //status of the buttons on the screen
   bool _upload_pic = false;
   bool _choose_pic = false;
   bool _continue = false;
-
-  @override
-  void initState() {
-    files.addListener(() => setState(() {}));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    files.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
