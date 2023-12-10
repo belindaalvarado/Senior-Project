@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:camera_camera/camera_camera.dart';
 import 'package:senior_project/screens/result_screen.dart';
-import '../utils/model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../utils/globals.dart' as globals;
-
-//make a reference to the model
-Model model = Model();
+import './upload_picture_screen1.dart';
 
 class UploadPictureScreen2 extends StatefulWidget {
   const UploadPictureScreen2({Key? key}) : super(key: key);
@@ -84,7 +81,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-  //button to take/re-take the photo from user
+                        //button to take/re-take the photo from user
                         FloatingActionButton(
                             elevation: 0,
                             backgroundColor: Color.fromRGBO(168, 199, 183, 1),
@@ -105,7 +102,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                                             },
                                           )));
                             }),
-  //button to confirm the photo uploaded by the user
+                        //button to confirm the photo uploaded by the user
                         FloatingActionButton(
                             elevation: 0,
                             backgroundColor: _continue == true
@@ -150,7 +147,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                                 Reference ref2 = storage.ref('user_pic_2.jpg');
                                 Reference ref3 = storage.ref(globals.hairColor);
 
-// Get the URL locations for the firebase references to feed into the model                                
+// Get the URL locations for the firebase references to feed into the model
                                 urlForDatabase1 = getImageURL(ref1);
                                 urlForDatabase2 = getImageURL(ref2);
                                 urlForDatabase3 = getImageURL(ref3);
@@ -175,7 +172,7 @@ class _UploadPictureScreen2State extends State<UploadPictureScreen2> {
                                     MaterialPageRoute(
                                         builder: (context) => ResultScreen()),
                                   );
-                                } catch (error) { 
+                                } catch (error) {
                                   // catch errors
                                   print("Error: $error");
 

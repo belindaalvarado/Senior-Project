@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/utils/buttons.dart';
 import 'package:senior_project/utils/templates.dart';
 import 'package:senior_project/screens/result_screen.dart';
-import '../utils/model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../utils/globals.dart' as globals;
-
-Model model = Model();
+import './upload_picture_screen1.dart';
 
 class GalleryScreen extends StatefulWidget {
   final String length;
@@ -55,8 +53,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
             ),
             SizedBox(
               height: 100,
-            )
-            ,
+            ),
             GridView.count(
               padding: EdgeInsets.only(left: 10, right: 10),
               crossAxisCount: 3,
@@ -64,7 +61,6 @@ class _GalleryScreenState extends State<GalleryScreen> {
               crossAxisSpacing: 5,
               shrinkWrap: true,
               children: List.generate(isSelected.length, (i) {
-                
                 return ImageButton(
                   width: 10,
                   height: 10,
@@ -84,8 +80,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   isSelected: isSelected[i],
                 );
               }),
-            )
-            ,
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 100),
               child: ElevatedButton(
@@ -124,7 +119,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   Reference ref1 = storage.ref('user_pic_1.jpg');
                   Reference ref2 = storage.ref(imageChoice);
                   Reference ref3 = storage.ref(globals.hairColor);
-                 
+
                   print("Ref1 PATH: ${ref1.fullPath}");
                   print("Ref2 PATH: ${ref2.fullPath}");
                   print("Ref3 PATH: ${ref3.fullPath}");
@@ -139,13 +134,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
                   try {
                     String image1 = await urlForDatabase1;
-                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_1.png?alt=media&token=48d6f110-4a43-4630-9830-3101fa772c58";
-                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/gallery_pictures%2Fshort%2Fshort_1.png?alt=media&token=f067205e-3893-4ebd-8605-7ace7cf8f8f7";
-
                     String image2 = await urlForDatabase2;
-                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/man_2.png?alt=media&token=de06f794-251a-4dca-84b8-09fe0cb565e7";
-                    //"https://firebasestorage.googleapis.com/v0/b/trimming-trends-c1485.appspot.com/o/gallery_pictures%2Fshort%2Fshort_2.png?alt=media&token=4d2e9f8d-1332-4817-af1d-e8faa1bd8f40";
-
                     String image3 = await urlForDatabase3;
 
                     //create requests to model
