@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './gallery_screen.dart';
+import './upload_picture_screen1.dart';
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -10,7 +10,6 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
   String Url = model.output_URL;
-
 
   @override
   Widget build(BuildContext context) {

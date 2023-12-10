@@ -3,6 +3,9 @@ import 'package:senior_project/utils/templates.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:camera_camera/camera_camera.dart';
+import '../utils/model.dart';
+
+Model model = Model();
 
 class UploadPictureScreen1 extends StatefulWidget {
   const UploadPictureScreen1({Key? key}) : super(key: key);
@@ -57,7 +60,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-  //button to take/re-take a photo
+                  //button to take/re-take a photo
                   FloatingActionButton(
                     onPressed: () {
                       Navigator.push(
@@ -79,7 +82,7 @@ class _UploadPictureScreen1State extends State<UploadPictureScreen1> {
                     backgroundColor: Color.fromRGBO(168, 199, 183, 1),
                     elevation: 0,
                   ),
-  //button to confirm the uploaded picture
+                  //button to confirm the uploaded picture
                   FloatingActionButton(
                       elevation: 0,
                       backgroundColor: _continue == true
