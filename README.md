@@ -1,16 +1,10 @@
-# senior_project
+# Undergraduate Senior Project - Fall 2023
 
-A new Flutter project.
+**Demo A:** ***This demo shows how a user is able to change their hair color, as well as the length/style of their hair when provided with choices from our gallery.***
 
-## Getting Started
+https://github.com/user-attachments/assets/9b40a433-a57f-4040-aabd-93886bf0b188
 
-This project is a starting point for a Flutter application.
+**Demo B:** ***This demo shows how a user is able to swap hairstyles with a picture they choose to upload.***
 
-A few resources to get you started if this is your first Flutter project:
+https://github.com/user-attachments/assets/f27934b6-150e-46e9-aed7-d667d2bd21ec
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
